@@ -1,6 +1,6 @@
 # PQC OpenSSL Lab
 
-Una imagen Docker pequeña para observar criptografía post-cuántica funcionando dentro de OpenSSL 3.5 LTS.
+Una imagen Docker pequeña para explorar criptografía post-cuántica funcionando dentro de OpenSSL 3.5 LTS.
 
 Esto puede ser útil en escenarios donde queremos enseñar que la criptografía post-cuántica (**PQC**) ya no es teoría ni un experimento de laboratorio aparte, sino algo que viaja dentro de software que la gente despliega hoy. La imagen acompaña al laboratorio de la sesión `Casos de uso` de la microcredencial de computación cuántica. El objetivo no es aprender OpenSSL a fondo, sino ver con los propios ojos qué cambia en un handshake TLS cuando entra PQC y qué se queda igual.
 

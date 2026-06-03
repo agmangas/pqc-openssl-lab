@@ -1,6 +1,6 @@
 # Laboratorio: TLS híbrido con PQC
 
-El objetivo de este laboratorio es comprobar, con las manos, que la criptografía post-cuántica ya se puede negociar en TLS 1.3. No vamos a montar una web ni a capturar tráfico: nos basta con dos handshakes en local, hechos con la propia imagen del repositorio, uno clásico y otro híbrido con `X25519MLKEM768`.
+El objetivo de este ejercicio es comprobar que la criptografía post-cuántica ya se puede negociar en TLS 1.3. Nos basta con dos handshakes en local, hechos con la propia imagen del repositorio, uno clásico y otro híbrido con `X25519MLKEM768`.
 
 Esto puede ser útil para fijar tres ideas que suelen costar al principio:
 
@@ -8,7 +8,7 @@ Esto puede ser útil para fijar tres ideas que suelen costar al principio:
 * La aplicación no se toca. Lo que cambia es el grupo de intercambio de claves que se negocia por debajo.
 * El coste operativo no desaparece: aparece en bytes, en compatibilidad y en las pruebas que toca hacer antes de desplegar.
 
-Si al cerrar el ejercicio puedes explicar esas tres ideas con tus propias palabras, el laboratorio ha cumplido.
+Si al cerrar el ejercicio puedes explicar esas tres ideas con tus propias palabras, el ejercicio ha sido exitoso.
 
 ## Arrancar el entorno
 
@@ -30,8 +30,6 @@ PQC OpenSSL Lab
 
 Elige una opción [1-4]:
 ```
-
-> Si Docker no está disponible en clase, usa la salida que comparta el profesor. Lo importante es leer qué cambia en pantalla, no memorizar comandos.
 
 Vamos a recorrer las tres demos en orden.
 
@@ -95,16 +93,3 @@ Los bytes exactos pueden variar entre máquinas, pero el patrón que importa no 
 > **Pregunta de control.** ¿Por qué importa esa diferencia de tamaño en producción?
 
 Porque ese sobrecoste lo acaban absorbiendo los certificados, los handshakes, el almacenamiento, la MTU, los equipos antiguos y la observabilidad. No es un simple flag que se activa en la configuración.
-
-## Debate final
-
-Para cerrar, vale la pena discutir en grupo:
-
-* ¿Qué tramo de TLS ha cambiado en el laboratorio y cuál se ha quedado igual?
-* Entre rendimiento, compatibilidad y operación, ¿dónde duele primero?
-* ¿Qué inventario tendría que hacer tu organización antes de activar PQC?
-* ¿Por qué hablamos de *crypto agility* y no solo de «activar PQC»?
-
-## Cierre
-
-PQC ya está en OpenSSL 3.5 y en otros componentes que despliegas hoy. El primer impacto suele notarse en el handshake, tanto en el KEM como en las firmas. La aplicación muchas veces ni se entera; las operaciones, sí. La conclusión práctica es la de siempre: mide, prueba con clientes viejos y planifica el despliegue antes de tocar producción.
