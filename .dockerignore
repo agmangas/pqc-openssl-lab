@@ -1,0 +1,9 @@
+.git
+.github
+README.md
+LICENSE
+*.log
+tmp
+dist
+build
+.DS_Store
