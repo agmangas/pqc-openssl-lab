@@ -4,7 +4,7 @@ set -euo pipefail
 workdir="$(mktemp -d)"
 trap 'rm -rf "$workdir"' EXIT
 
-printf 'mensaje de prueba para PQC\n' >"$workdir/message.txt"
+printf 'test message for PQC\n' >"$workdir/message.txt"
 
 make_signature() {
 	local label="$1"
@@ -25,17 +25,17 @@ make_signature() {
 }
 
 echo
-echo "Comparación de firmas"
-echo "====================="
-printf '%-22s %-24s %10s %12s\n' "Tipo" "Algoritmo" "Pública" "Firma"
-printf '%-22s %-24s %10s %12s\n' "----" "---------" "-------" "-----"
+echo "Signature comparison"
+echo "===================="
+printf '%-22s %-24s %10s %12s\n' "Type" "Algorithm" "Public" "Signature"
+printf '%-22s %-24s %10s %12s\n' "----" "---------" "------" "---------"
 
-make_signature "Clásica moderna" "ED25519" "ed25519"
-make_signature "PQC retículos" "ML-DSA-65" "mldsa65"
-make_signature "PQC hashes" "SLH-DSA-SHA2-128s" "slhdsa"
+make_signature "Modern classical" "ED25519" "ed25519"
+make_signature "PQC lattice" "ML-DSA-65" "mldsa65"
+make_signature "PQC hash-based" "SLH-DSA-SHA2-128s" "slhdsa"
 
 echo
-echo "Lectura"
-echo "-------"
-echo "Las firmas PQC pueden ocupar varios kilobytes. Eso afecta certificados, handshakes,"
-echo "almacenamiento, compatibilidad y observabilidad."
+echo "Takeaway"
+echo "--------"
+echo "PQC signatures can take up several kilobytes. That affects certificates, handshakes,"
+echo "storage, compatibility and observability."

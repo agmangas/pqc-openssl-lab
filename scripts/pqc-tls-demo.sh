@@ -64,22 +64,22 @@ run_case() {
 
 	printf '\n%s\n' "$label"
 	printf '%s\n' "$(printf '%*s' "${#label}" '' | tr ' ' '-')"
-	printf 'Grupo pedido:              %s\n' "$group"
-	printf 'TLS/cipher suite:          %s\n' "${tls_summary:-no encontrado}"
-	printf 'Grupo TLS negociado:       %s\n' "${negotiated:-no mostrado para este grupo}"
-	printf 'Tamaño de ClientHello:     %s\n' "${client_hello:-no encontrado}"
+	printf 'Group requested:           %s\n' "$group"
+	printf 'TLS/cipher suite:          %s\n' "${tls_summary:-not found}"
+	printf 'Negotiated TLS group:      %s\n' "${negotiated:-not shown for this group}"
+	printf 'ClientHello size:          %s\n' "${client_hello:-not found}"
 }
 
 echo
-echo "Comparación TLS 1.3"
-echo "==================="
-echo "El certificado es el mismo en ambos casos. Cambiamos solo el grupo de intercambio de claves."
+echo "TLS 1.3 comparison"
+echo "=================="
+echo "The certificate is the same in both cases. We change only the key exchange group."
 
-run_case "Caso A: clásico" "X25519" "9443"
-run_case "Caso B: híbrido PQC" "X25519MLKEM768" "9444"
+run_case "Case A: classical" "X25519" "9443"
+run_case "Case B: hybrid PQC" "X25519MLKEM768" "9444"
 
 echo
-echo "Lectura"
-echo "-------"
-echo "En el caso híbrido debe aparecer X25519MLKEM768 como grupo TLS negociado."
-echo "El cipher suite de datos puede ser el mismo: PQC afecta aquí al handshake, no al contenido HTTP."
+echo "Takeaway"
+echo "--------"
+echo "In the hybrid case, X25519MLKEM768 should appear as the negotiated TLS group."
+echo "The data cipher suite can stay the same: here PQC affects the handshake, not the HTTP content."

@@ -7,17 +7,17 @@ echo "-------"
 openssl version -a | sed -n '1,5p'
 
 echo
-echo "KEM disponibles relacionados con ML-KEM"
-echo "---------------------------------------"
+echo "KEMs available related to ML-KEM"
+echo "--------------------------------"
 openssl list -kem-algorithms | grep -E 'ML-KEM|MLKEM|X25519MLKEM|SecP.*MLKEM' || true
 
 echo
-echo "Firmas disponibles relacionadas con ML-DSA y SLH-DSA"
-echo "----------------------------------------------------"
+echo "Signatures available related to ML-DSA and SLH-DSA"
+echo "--------------------------------------------------"
 openssl list -signature-algorithms | grep -E 'ML-DSA|MLDSA|SLH-DSA' || true
 
 echo
-echo "Lectura"
-echo "-------"
-echo "ML-KEM se usa para acordar claves. ML-DSA y SLH-DSA se usan para firmas."
-echo "Que aparezcan aquí significa que el runtime criptográfico ya conoce estos algoritmos."
+echo "Takeaway"
+echo "--------"
+echo "ML-KEM is used to agree keys. ML-DSA and SLH-DSA are used for signatures."
+echo "Their presence here means the crypto runtime already knows these algorithms."
