@@ -79,6 +79,7 @@ RUN apt-get update \
   coreutils \
   grep \
   procps \
+  tini \
   && rm -rf /var/lib/apt/lists/*
 
 # Pull the compiled OpenSSL from the build stage, then add the lab's scripts and
@@ -101,6 +102,6 @@ ENV OPENSSL_VERSION="${OPENSSL_VERSION}"
 # instead of at container startup.
 RUN chmod +x /usr/local/bin/*.sh && openssl version
 
-# When the container starts, drop the user straight into the lab's interactive
-# menu rather than a bare shell.
-ENTRYPOINT ["/usr/local/bin/menu.sh"]
+# Tini handles PID 1 signal forwarding so Ctrl-C cleanly exits the interactive
+# menu and any currently running demo.
+ENTRYPOINT ["/usr/bin/tini", "-g", "--", "/usr/local/bin/menu.sh"]
