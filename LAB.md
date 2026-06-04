@@ -10,6 +10,43 @@ Three ideas worth locking in early:
 
 If you can explain those three ideas in your own words at the end, the lab succeeded.
 
+## TLS building blocks
+
+TLS does two things: **setup** (handshake), then **encrypted traffic**. The handshake has three separate jobs—do not mix them up.
+
+```mermaid
+flowchart TB
+  TLS["TLS: secure connection"]
+  TLS --> HS["1. Handshake — setup"]
+  TLS --> DATA["2. Encrypted traffic"]
+
+  HS --> ID["Who is the server?<br/>Certificate + digital signature"]
+  HS --> LOCK["How to encrypt messages?<br/>Cipher suite"]
+  HS --> KE
+
+  subgraph KE["Derive session keys for the cipher suite"]
+    KEX["KEX — key exchange"]
+    KEM["KEM — key encapsulation"]
+    SK["Session keys"]
+    KEX --> SK
+    KEM -.->|"only used when negotiating a hybrid group"| SK
+  end
+
+  ID --> DATA
+  SK --> DATA
+  LOCK --> DATA
+```
+
+**KEX and KEM are two ways to do the same handshake job:** derive **session keys** for the negotiated **cipher suite**. They use different math; hybrid runs both (e.g. `X25519` + ML-KEM-768). Do not read “KEX = classical, KEM = PQC” as a rule, that is only how hybrid groups are built today.
+
+| Handshake job         | Building blocks                | Classical demo      | Hybrid demo                  |
+| --------------------- | ------------------------------ | ------------------- | ---------------------------- |
+| Prove identity        | Certificate, digital signature | Same cert           | Same cert                    |
+| Derive session keys   | **KEX**; optionally **KEM**    | KEX only (`X25519`) | KEX + KEM (`X25519MLKEM768`) |
+| Choose how to encrypt | Cipher suite                   | Same AEAD           | Same AEAD                    |
+
+Identity (signatures in certs) and key agreement (KEX/KEM) are **different axes**. Part 2 of this lab changes only the middle row.
+
 ## Start the environment
 
 Run the container interactively:
