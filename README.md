@@ -80,7 +80,7 @@ In the hybrid run, client output should include `Negotiated TLS1.3 group: X25519
 | PQC (lattice)    | `ML-DSA-65`         |
 | PQC (hash-based) | `SLH-DSA-SHA2-128s` |
 
-> Exact byte counts can vary by machine, but the pattern holds: post-quantum signatures jump from tens of bytes to kilobytes. That shows up in certificates, handshake messages, storage, and observability pipelines.
+> The raw signature sizes for these algorithms are fixed, while displayed public-key sizes can vary with encoding and OpenSSL output format. The pattern holds: post-quantum signatures jump from tens of bytes to kilobytes. That shows up in certificates, handshake messages, storage, and observability pipelines.
 
 ## Local build
 

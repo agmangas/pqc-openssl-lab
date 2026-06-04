@@ -125,7 +125,7 @@ PQC hash-based         SLH-DSA-SHA2-128s               ...         7856
 | `ML-DSA-65`         | PQC (lattice)    | Much larger     |
 | `SLH-DSA-SHA2-128s` | PQC (hash-based) | Larger still    |
 
-Exact byte counts can differ between machines, but the pattern matters: PQC signatures are in the kilobyte range, not tens of bytes.
+The raw signature sizes shown here are fixed for these algorithms; public-key byte counts can differ if the encoding or OpenSSL output format changes. The pattern matters: PQC signatures are in the kilobyte range, not tens of bytes.
 
 > **Check your understanding.** Why does that size difference matter in production?
 
